@@ -12,10 +12,11 @@ This repository contains a lightweight technical validation for the Uni Textbook
 ## Files in This Repository
 | File | Description | Author |
 |------|-------------|--------|
-| `schema.sql` | Database schema with indexes | Gift |
-| `sample-data.sql` | 10 sample textbook listings | Josh |
+| `README` | Project Lead, Coordination, Integration & Documentation | Tiego |
+| `schema.sql` | Database schema with indexes | Neo |
+| `sample-data.sql` | 10 sample textbook listings | Gift |
 | `queries.sql` | 4 test queries with EXPLAIN ANALYZE | Omphemetse |
-| `screenshots/` | Performance test screenshots | Neo |
+| `screenshots/` | Performance test screenshots | Josh |
 
 ## Database Schema
 
