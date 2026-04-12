@@ -1,0 +1,11 @@
+# Not really security, just for speed's sake
+.git
+.gitignore
+*.env.*
+*.md
+screenshots/
+*.log
+node_modules/
+.DS_Store
+Dockerfile
+.dockerignore
