@@ -1,92 +1,18 @@
-# NexusDev - Uni Textbook Marketplace Technical Validation
-
-## Overview
-This repository contains a lightweight technical validation for the Uni Textbook Marketplace project. We demonstrate our database design approach for fast, multi-filter search on textbook listings.
-
-## Validation Goals
-- ✅ Design schema for structured textbook listings
-- ✅ Create indexes for read-heavy performance
-- ✅ Demonstrate multi-filter search capability
-- ✅ Document expected performance metrics
-
-## Files in This Repository
-| File | Description | Author |
-|------|-------------|--------|
-| `README` | Project Lead, Coordination, Integration & Documentation | Tiego |
-| `schema.sql` | Database schema with indexes | Neo |
-| `sample-data.sql` | 10 sample textbook listings | Gift |
-| `queries.sql` | 4 test queries with EXPLAIN ANALYZE | Omphemetse |
-| `screenshots/` | Performance test screenshots | Josh |
-
-## Database Schema
-
-### Table: listings
-| Field | Type | Description |
-|-------|------|-------------|
-| id | UUID | Primary key |
-| title | VARCHAR(500) | Textbook title |
-| isbn | VARCHAR(13) | ISBN identifier |
-| edition | INTEGER | Edition number |
-| condition | VARCHAR(50) | Like New, Good, Acceptable, Poor |
-| annotation_level | VARCHAR(50) | None, Light, Heavy |
-| extras | JSONB | Flexible fields (access code, notes) |
-| price | DECIMAL(10,2) | Selling price |
-| module_code | VARCHAR(20) | Course code (e.g., COS301) |
-
-### Indexes
-| Index | Purpose |
-|-------|---------|
-| `idx_listings_module_price` | Most common filter (module + price) |
-| `idx_listings_edition_condition` | Edition + condition filtering |
-| `idx_listings_module_annotation` | Module + annotation level |
-
-## Sample Queries & Expected Performance
-
-### Test 1: Single Filter
-```sql
-SELECT * FROM listings WHERE module_code = 'COS301';
-
-## Docker Setup
-This project uses Docker to run a PostgreSQL database for the Uni Textbook Marketplace validation. The database is initialised with schema, sample data, and performance test queries.
-
-### Database connection details
-Host: localhost
-Port: 5433
-Database: marketplace
-Username: postgres
-Password: postgres
-
-### Running verification scripts
-```bash
-bash verify.sh
-```
-
-### Build the docker container
-```bash
+📚 NexusDev: Uni Textbook MarketplaceTechnical Validation & Database Optimization📝 Project OverviewThis repository serves as the technical validation for the Uni Textbook Marketplace. The primary focus is demonstrating a high-performance database architecture tailored for read-heavy, multi-filter searches typical of high-traffic student marketplaces.🎯 Validation GoalsSchema Design: Implementation of structured listings for academic accuracy.Optimization: Strategic indexing to ensure sub-millisecond query responses.Search Capability: Demonstration of complex multi-filter queries (Module, Condition, Price).Performance Metrics: Documentation of execution plans using EXPLAIN ANALYZE.👥 The TeamContributorRoleDeliverableTiegoProject LeadIntegration, Coordination & DocumentationNeoDatabase ArchitectOptimized Schema & IndexingGiftData EngineerSample Dataset GenerationOmphemetsePerformance AnalystSQL Query Optimization & TestingJoshQA EngineerVisual Performance Verification🏗 Database Architecture📊 Schema: listingsWe utilize a mix of strict typing for core data and JSONB for flexible metadata.FieldTypeDescriptionidUUIDPrimary Key (Distributed-safe)titleVARCHARTextbook title (Indexed for search)isbnVARCHAR(13)Standard ISBN identifierconditionENUMLike New, Good, Acceptable, PoorannotationVARCHARLevel of markings (None, Light, Heavy)extrasJSONBFlexible fields (Access codes, included notes)priceDECIMALSelling price in local currencymodule_codeVARCHARUniversity course code (e.g., COS301)🚀 Performance IndexingTo ensure scalability, we implemented the following composite indexes:idx_listings_module_price: Optimizes the most frequent search path.idx_listings_edition_condition: Refines results for specific academic requirements.idx_listings_module_annotation: Targets students looking for "clean" copies.🛠 Usage & DeploymentThis project is fully containerized for instant environment replication.🔌 Connection CredentialsHost: localhostPort: 5433Database: marketplaceUser/Pass: postgres / postgres💻 Quick Start Commands1. Environment InitializationBash# Build the validation image
 docker build -t textbook-db .
-```
 
-### Shut off the docker container
-```bash
-docker compose down -v
-```
-
-### Run the docker container
-```bash
+# Launch the environment (detached mode)
 docker compose up --build -d
-```
+2. Testing & VerificationBash# Run the automated verification suite
+bash verify.sh
+3. Maintenance & CleanupBash# Stop and remove containers
+docker compose down -v
 
-### Stop the docker container
-```bash
-docker stop textbook-postgres
-```
-
-### Start the docker container
-```bash
-docker start textbook-postgres
-```
-
-### reset the environment for sql
-```bash
-docker rm textbook-postgres 
-```
+# Hard reset of the SQL environment
+docker rm textbook-postgres
+🔍 Sample Query DemonstrationBelow is an example of a single-filter lookup utilized in the performance testing suite:SQL-- Fetching all listings for a specific module
+SELECT title, price, condition 
+FROM listings 
+WHERE module_code = 'COS301'
+ORDER BY price ASC;
+Note: Performance screenshots and execution logs can be found in the /screenshots directory.
