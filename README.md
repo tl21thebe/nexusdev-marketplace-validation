@@ -55,7 +55,7 @@ main
   ├── feature/sample-data         (Gift)
   ├── feature/test-queries        (Omphemetse)
   ├── feature/docker-setup        (Josh)
-  └── feature/readme-update       (Tiego)
+  └readme-update       (Tiego)
 ```
 
 ---
