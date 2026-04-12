@@ -1,11 +1,11 @@
-# Not really security, just for speed's sake
-.git
-.gitignore
-*.env.*
-*.md
-screenshots/
-*.log
+# dependencies
 node_modules/
+.next/
+out/
+# env files
+.env
+.env.*
+*.log
 .DS_Store
-Dockerfile
-.dockerignore
+dist/
+build/

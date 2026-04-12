@@ -45,3 +45,10 @@ This repository contains a lightweight technical validation for the Uni Textbook
 ### Test 1: Single Filter
 ```sql
 SELECT * FROM listings WHERE module_code = 'COS301';
+
+## Docker Setup
+
+### Build and start the database
+
+```bash
+docker compose up --build -d

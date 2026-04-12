@@ -1,13 +1,14 @@
 # dependencies
-node_modules
-package-lock.json
+node_modules/
+.next/
+out/
+dist/
+build/
 
-# next
-.next
-out
-pnpm-lock.yaml
-# builds
-dist
-build
 # env files
+.env
 .env.*
+*.log
+.DS_Store
+package-lock.json
+pnpm-lock.yaml
