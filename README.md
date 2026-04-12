@@ -45,3 +45,48 @@ This repository contains a lightweight technical validation for the Uni Textbook
 ### Test 1: Single Filter
 ```sql
 SELECT * FROM listings WHERE module_code = 'COS301';
+
+## Docker Setup
+This project uses Docker to run a PostgreSQL database for the Uni Textbook Marketplace validation. The database is initialised with schema, sample data, and performance test queries.
+
+### Database connection details
+Host: localhost
+Port: 5433
+Database: marketplace
+Username: postgres
+Password: postgres
+
+### Running verification scripts
+```bash
+bash verify.sh
+```
+
+### Build the docker container
+```bash
+docker build -t textbook-db .
+```
+
+### Shut off the docker container
+```bash
+docker compose down -v
+```
+
+### Run the docker container
+```bash
+docker compose up --build -d
+```
+
+### Stop the docker container
+```bash
+docker stop textbook-postgres
+```
+
+### Start the docker container
+```bash
+docker start textbook-postgres
+```
+
+### reset the environment for sql
+```bash
+docker rm textbook-postgres 
+```
